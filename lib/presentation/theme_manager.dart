@@ -6,41 +6,50 @@ import 'package:tut_app/presentation/values_manager.dart';
 
 ThemeData getAppTheme() {
   return ThemeData(
-    // main colors
-    primaryColor: ColorManager.primary,
-    primaryColorLight: ColorManager.lightPrimary,
-    primaryColorDark: ColorManager.darkPrimary,
-    disabledColor: ColorManager.grey1,
-    splashColor: ColorManager.lightPrimary,
-    // card theme
-    cardTheme: CardTheme(
-      color: ColorManager.white,
-      elevation: AppSize.s4,
-      shadowColor: ColorManager.grey,
-    ),
-
-    // AppBar THeme
-    appBarTheme: AppBarTheme(
-        centerTitle: true,
+      // main colors
+      primaryColor: ColorManager.primary,
+      primaryColorLight: ColorManager.lightPrimary,
+      primaryColorDark: ColorManager.darkPrimary,
+      disabledColor: ColorManager.grey1,
+      splashColor: ColorManager.lightPrimary,
+      // card theme
+      cardTheme: CardTheme(
+        color: ColorManager.white,
         elevation: AppSize.s4,
-        shadowColor: ColorManager.primary,
-        titleTextStyle:
-            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16)),
+        shadowColor: ColorManager.grey,
+      ),
 
-    // button theme
-    buttonTheme: ButtonThemeData(
-        shape: const StadiumBorder(),
-        disabledColor: ColorManager.grey1,
-        buttonColor: ColorManager.primary,
-        splashColor: ColorManager.lightPrimary),
+      // AppBar THeme
+      appBarTheme: AppBarTheme(
+          centerTitle: true,
+          elevation: AppSize.s4,
+          shadowColor: ColorManager.primary,
+          titleTextStyle: getRegularStyle(
+              color: ColorManager.white, fontSize: FontSize.s16)),
 
-    // elevated button theme
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            textStyle: getRegularStyle(
-                color: ColorManager.white, fontSize: FontSize.s17),
-            backgroundColor: ColorManager.primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSize.s12)))),
-  );
+      // button theme
+      buttonTheme: ButtonThemeData(
+          shape: const StadiumBorder(),
+          disabledColor: ColorManager.grey1,
+          buttonColor: ColorManager.primary,
+          splashColor: ColorManager.lightPrimary),
+
+      // elevated button theme
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              textStyle: getRegularStyle(
+                  color: ColorManager.white, fontSize: FontSize.s17),
+              backgroundColor: ColorManager.primary,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSize.s12)))),
+
+      // Text Theme
+      textTheme: TextTheme(
+        displayLarge: getSemiBoldStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s16),
+        titleMedium: getMediumStyle(
+            color: ColorManager.lightGrey, fontSize: FontSize.s14),
+        bodySmall: getRegularStyle(color: ColorManager.grey1),
+        bodyLarge: getRegularStyle(color: ColorManager.grey),
+      ));
 }
