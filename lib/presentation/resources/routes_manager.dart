@@ -15,7 +15,9 @@ class Routes {
   static const String onBoardingRoute = "/onBoarding";
   static const String mainRoute = "/main";
   static const String storeDetailsRoute = "/storeDetails";
+}
 
+class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashRoute:
