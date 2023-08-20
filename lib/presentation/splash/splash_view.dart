@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
 import 'package:tut_app/presentation/resources/constants_manager.dart';
+import 'package:tut_app/presentation/resources/values_manager.dart';
 
 import '../resources/routes_manager.dart';
 
@@ -32,6 +34,13 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorManager.primary,
+        elevation: AppSize.s0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: ColorManager.primary,
+            statusBarIconBrightness: Brightness.light),
+      ),
       backgroundColor: ColorManager.primary,
       body: const Hero(
         tag: "2",

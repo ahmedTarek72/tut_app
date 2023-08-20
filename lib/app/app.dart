@@ -1,5 +1,7 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:tut_app/presentation/resources/routes_manager.dart';
+import 'package:tut_app/presentation/resources/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
   // private constructor
@@ -19,7 +21,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
+     
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      theme: getAppTheme(),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,
