@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tut_app/presentation/forgot_password/forgot_password_view.dart';
-import 'package:tut_app/presentation/login/login_view.dart';
-import 'package:tut_app/presentation/main/main_view.dart';
-import 'package:tut_app/presentation/onboarding/view/onboarding_view.dart';
-import 'package:tut_app/presentation/register/register_view.dart';
-import 'package:tut_app/presentation/splash/splash_view.dart';
-import 'package:tut_app/presentation/store_details/store_details.dart';
+import '../forgot_password/forgot_password_view.dart';
+import '../login/login_view.dart';
+import '../main/main_view.dart';
+import '../onboarding/view/onboarding_view.dart';
+import '../register/register_view.dart';
+import '../splash/splash_view.dart';
+import '../store_details/store_details.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -38,7 +38,7 @@ class RouteGenerator {
         );
       case Routes.onBoardingRoute:
         return MaterialPageRoute<dynamic>(
-          builder: (_) => const OnboardingView(),
+          builder: (_) => const OnBoardingView(),
         );
       case Routes.mainRoute:
         return MaterialPageRoute<dynamic>(

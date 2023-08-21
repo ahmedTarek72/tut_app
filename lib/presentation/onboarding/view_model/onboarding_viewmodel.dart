@@ -1,37 +1,92 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:tut_app/domain/models.dart';
 
 import '../../base/base_view_model.dart';
+import '../../resources/assets_manager.dart';
+import '../../resources/strings_manager.dart';
 
 class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
+  late final List<SliderObject> _list;
+  int currentPageIndex = 0;
+  late int numOfPages;
+  late PageController pageController;
+
   final StreamController _streamController =
       StreamController<SliderViewObject>();
-  @override
-  void dispose() {}
 
   @override
-  void start() {}
+  void dispose() {
+    _streamController.close();
+    pageController.dispose();
+  }
 
   @override
-  void goToNextPage() {}
+  void start() {
+    _list = _getSliderData();
+    _postDataToView();
+    numOfPages = _list.length;
+    pageController = PageController(initialPage: currentPageIndex);
+  }
 
   @override
-  void goToPreviousPage() {}
+  void goToNextPage() {
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+  }
 
   @override
-  void onPageChanged(int index) {}
-  OnBoardingViewModel model = OnBoardingViewModel();
+  void goToPreviousPage() {
+    pageController.previousPage(
+        duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+  }
+
+  @override
+  void onPageChanged(int index) {
+    currentPageIndex = index;
+    _postDataToView();
+  }
 
   // data will be inputted to view model
   @override
-  Sink get inputSliderViewModel => throw UnimplementedError();
+  Sink get inputSliderViewModel => _streamController.sink;
 
   // data will be outputted from view model
   @override
-  Stream get outputSliderViewModel => throw UnimplementedError();
+  Stream<SliderViewObject> get outputSliderViewModel =>
+      _streamController.stream.map((sliderViewObject) => sliderViewObject);
+
+  // list of model objects will be send to view
+
+  void _postDataToView() {
+    _streamController.add(SliderViewObject(
+      sliderObject: _list[currentPageIndex],
+      currentIndex: currentPageIndex,
+      numOfPages: _list.length,
+    ));
+  }
+
+  List<SliderObject> _getSliderData() => [
+        SliderObject(
+            title: AppStrings.onBoardingHeader1,
+            description: AppStrings.onBoardingBody1,
+            image: ImageAssets.splashLogo1),
+        SliderObject(
+            title: AppStrings.onBoardingHeader2,
+            description: AppStrings.onBoardingBody2,
+            image: ImageAssets.splashLogo2),
+        SliderObject(
+            title: AppStrings.onBoardingHeader3,
+            description: AppStrings.onBoardingBody3,
+            image: ImageAssets.splashLogo3),
+        SliderObject(
+            title: AppStrings.onBoardingHeader4,
+            description: AppStrings.onBoardingBody4,
+            image: ImageAssets.splashLogo4),
+      ];
 }
 
 // inputs means orders from view to view model
@@ -46,5 +101,5 @@ mixin OnBoardingViewModelInputs {
 
 mixin OnBoardingViewModelOutputs {
   // output data from view model to view
-  Stream get outputSliderViewModel;
+  Stream<SliderViewObject> get outputSliderViewModel;
 }
