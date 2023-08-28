@@ -19,6 +19,7 @@ class SliderViewObject {
   });
 }
 
+// customer object model
 class Customer {
   String id;
 
@@ -28,6 +29,7 @@ class Customer {
   Customer(this.id, this.name, this.numOfNotifications);
 }
 
+// contacts object model
 class Contacts {
   String phone;
 
@@ -37,7 +39,10 @@ class Contacts {
   Contacts(this.phone, this.email, this.link);
 }
 
+// authentication object model
 class Authentication {
+  // we can use optional operator to make it nullable
+  // so we dont need to create empty object in extention file
   Customer? customer;
   Contacts? contacts;
   Authentication(this.customer, this.contacts);

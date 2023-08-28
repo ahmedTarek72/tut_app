@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:tut_app/app/constants.dart';
 
+import '../../app/constants.dart';
 import '../responses/responses.dart';
 
 part 'app_api.g.dart';
