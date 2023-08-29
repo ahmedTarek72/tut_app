@@ -50,6 +50,8 @@ class AuthenticationResponse extends BaseResponse {
   //fromJson which auto generate from json_serializable to convert json to dart object
   factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthenticationResponseFromJson(json);
+
+ 
 //toJson which auto generate from json_serializable to convert dart object to json again
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }

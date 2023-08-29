@@ -1,7 +1,8 @@
 // Purpose: Failure class to handle errors
 class Failure {
+  final int code;
   final String message;
-  final String code;
+  
 
-  Failure(this.message, this.code);
+  Failure(this.code, this.message);
 }
