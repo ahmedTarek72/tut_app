@@ -15,6 +15,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     this.appServiceClient,
   );
   // login method to get data from network
+  // this class send data to repo impl class then repo class 
+  //use mapper to map it into object
   @override
   Future<AuthenticationResponse> login(LogInRequest logInRequest) async {
     return await appServiceClient.login(

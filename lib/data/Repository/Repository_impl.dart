@@ -18,7 +18,7 @@ class RepositoryImpl implements Repository {
       LogInRequest logInRequest) async {
     var response = await _remoteDataSource.login(logInRequest);
     if (await _networkInfo.isConnected) {
-      if (response.status == 200) {
+      if (response.status == 0) {
         return Right(response.toDomain());
       } else {
         return Left(Failure(409, "No Internet Connection"));
