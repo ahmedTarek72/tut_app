@@ -30,7 +30,7 @@ class RepositoryImpl implements Repository {
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return Left(Failure(409, "No Internet Connection"));
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }

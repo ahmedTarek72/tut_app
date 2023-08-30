@@ -1,10 +1,12 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dio/dio.dart';
 import 'package:tut_app/data/network/failure.dart';
 
 class ErrorHandler implements Exception {
   late Failure failure;
   ErrorHandler.handle(dynamic error) {
-    if (error is DioError) {
+    if (error is DioException) {
       // dio error so its an error from response of the API or from dio itself
       failure = _handleError(error);
     } else {
@@ -18,7 +20,7 @@ Failure _handleError(DioException error) {
   switch (error.type) {
     case DioExceptionType.connectionTimeout:
       return DataSource.CONNECT_TIMEOUT.getFailure();
-    case DioErrorType.sendTimeout:
+    case DioExceptionType.sendTimeout:
       return DataSource.SEND_TIMEOUT.getFailure();
     case DioExceptionType.receiveTimeout:
       return DataSource.RECIEVE_TIMEOUT.getFailure();
@@ -55,6 +57,7 @@ enum DataSource {
   NO_INTERNET_CONNECTION,
   DEFAULT
 }
+ late Dio dio = Dio();
 
 extension DataSourceExtension on DataSource {
   Failure getFailure() {
