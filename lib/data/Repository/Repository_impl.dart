@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:tut_app/data/mappers/mapper.dart';
+import 'package:tut_app/data/network/error_handler.dart';
 
 import '../../domain/model/models.dart';
 import '../../domain/repository/repository.dart';
@@ -16,12 +17,17 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, Authentication>> login(
       LogInRequest logInRequest) async {
-    var response = await _remoteDataSource.login(logInRequest);
     if (await _networkInfo.isConnected) {
-      if (response.status == 0) {
-        return Right(response.toDomain());
-      } else {
-        return Left(Failure(409, "No Internet Connection"));
+      try {
+        final response = await _remoteDataSource.login(logInRequest);
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
       }
     } else {
       return Left(Failure(409, "No Internet Connection"));
