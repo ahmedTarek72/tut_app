@@ -26,6 +26,7 @@ Failure _handleError(DioException error) {
       return DataSource.RECIEVE_TIMEOUT.getFailure();
     case DioExceptionType.badResponse:
       if (error.response != null &&
+    
           error.response?.statusCode != null &&
           error.response?.statusMessage != null) {
         return Failure(error.response?.statusCode ?? 0,
@@ -57,7 +58,7 @@ enum DataSource {
   NO_INTERNET_CONNECTION,
   DEFAULT
 }
- late Dio dio = Dio();
+
 
 extension DataSourceExtension on DataSource {
   Failure getFailure() {

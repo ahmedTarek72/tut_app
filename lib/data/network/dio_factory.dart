@@ -3,6 +3,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:tut_app/app/app_prefs.dart';
+import 'package:tut_app/presentation/resources/language_manager.dart';
 
 import '../../app/constants.dart';
 
@@ -13,14 +15,18 @@ const String AUTHORIZATION = "authorization";
 const String DEFAULT_LANGUAGE = "language";
 
 class DioFactory {
+  final LanguagePreferences _languagePreferences;
+  DioFactory(this._languagePreferences);
+
   Future<Dio> getDio() async {
     Dio dio = Dio();
 
+    final String? language = await _languagePreferences.getAppLanguage();
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
-      AUTHORIZATION: "Bearer ",
-      DEFAULT_LANGUAGE: "en"
+      AUTHORIZATION: Constants.token,
+      DEFAULT_LANGUAGE: language ?? LanguageType.ENGLISH.getValue()
     };
 
     dio.options = BaseOptions(
