@@ -16,7 +16,7 @@ class OnBoardingViewModel extends BaseViewModel
   late PageController pageController;
 
   final StreamController _streamController =
-      StreamController<SliderViewObject>();
+      StreamController<SliderViewObject>.broadcast();
 
   @override
   void dispose() {

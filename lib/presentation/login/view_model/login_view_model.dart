@@ -4,24 +4,34 @@ import 'package:tut_app/presentation/base/base_view_model.dart';
 
 class LoginViewModel
     implements BaseViewModel, LoginViewModelInput, LoginViewModelOutput {
-  final StreamController _userNameController = StreamController<String>();
-  final StreamController _passwordController = StreamController<String>();
+  final StreamController _userNameStreamController =
+      StreamController<String>.broadcast();
+  final StreamController _passwordStreamController =
+      StreamController<String>.broadcast();
   @override
   void dispose() {
-    _passwordController.close();
-    _userNameController.close();
+    _passwordStreamController.close();
+    _userNameStreamController.close();
   }
 
   @override
   void start() {}
 
   @override
-  // TODO: implement isPasswordValid
-  Stream<bool> get isPasswordValid => throw UnimplementedError();
+  Stream<bool> get isPasswordValid => _passwordStreamController.stream
+      .map((password) => _isPasswordValid(password));
+
+  bool _isUserNameValid(String userName) {
+    return userName.isNotEmpty;
+  }
+
+  bool _isPasswordValid(String password) {
+    return password.isNotEmpty;
+  }
 
   @override
-  // TODO: implement isUserNameValid
-  Stream<bool> get isUserNameValid => throw UnimplementedError();
+  Stream<bool> get isUserNameValid => _userNameStreamController.stream
+      .map((userName) => _isUserNameValid(userName));
 
   @override
   login() {
@@ -30,12 +40,10 @@ class LoginViewModel
   }
 
   @override
-  // TODO: implement password
-  Sink get password => throw UnimplementedError();
+  Sink get password => _passwordStreamController.sink;
 
   @override
   setPassword(String password) {
-    // TODO: implement setPassword
     throw UnimplementedError();
   }
 
@@ -46,8 +54,7 @@ class LoginViewModel
   }
 
   @override
-  // TODO: implement userName
-  Sink get userName => throw UnimplementedError();
+  Sink get userName => _userNameStreamController.sink;
 }
 
 abstract class LoginViewModelInput {
